@@ -1,0 +1,25 @@
+{
+  "name": "practical-fp",
+  "version": "0.0.1",
+  "description": "FP course with fp-ts",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nilsml/practical-fp.git"
+  },
+  "keywords": [
+    "fp-ts"
+  ],
+  "author": "Nils Magne Lunde",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nilsml/practical-fp/issues"
+  },
+  "homepage": "https://github.com/nilsml/practical-fp#readme",
+  "dependencies": {
+    "fp-ts": "^2.13.1"
+  }
+}
