@@ -1,7 +1,9 @@
-import { run } from './exercise1'
+import { submit } from './exercise1'
 
-test('Vanilla version works', () => {
-  expect(run(1)).toBe(3)
+test('Invalid name fails', () => {
+  expect(submit('')).toBe(false)
 })
 
-export const foo = 1
+test('Valid name gives success', () => {
+  expect(submit('A Name')).toBe(true)
+})
