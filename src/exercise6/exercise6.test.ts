@@ -28,7 +28,6 @@ describe('Getting address from ENV', () => {
     })
 
     test('When DotEnv has been run, the address is something', () => {
-      console.log('process.env', process.env)
       expect(getAddress()).toBeDefined()
     })
 

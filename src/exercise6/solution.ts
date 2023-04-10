@@ -4,6 +4,7 @@ Either can be very usefull when dealing with functions that can fail.
 It could be an api or just a function that is unpredictable.
 In addition to Option that gives us the value or none, Either will give us the value OR an alternative value.
 The alternative value could be an error message or a default value to use if no other value is presented.
+Reference: https://grossbart.github.io/fp-ts/modules/Either.ts.html
 */
 import { fromNullable } from 'fp-ts/Either'
 
