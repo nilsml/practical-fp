@@ -4,6 +4,10 @@ We shall export a function that returns true if:
 - Person has a name
 - Person is more than 18 years old
 
+Exercise:
+---------
+Change the code below to use only prure functions and no mutation
+
 */
 
 let isValid = false

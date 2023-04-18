@@ -4,6 +4,8 @@ And for different functions, different types may be used.
 fp-ts ts has a way of dealing with different error types, and it is referred to as widening a type.
 As you may have guessed, for widening sum types are perfect.
 
+Exercise:
+---------
 This exercise is basically the same as exercise8 with a couple of differences:
 1. The function getting ENV variable will use the EnvErrorType
 2. the function calling the API will use the ApiErrorType

@@ -7,5 +7,5 @@ Reference: https://grossbart.github.io/fp-ts/modules/Option.ts.html
 // A function that gives first element in string array if not empty
 export const head = (strArray: Array<string>): string | null => strArray.length > 0 ? strArray[0] : null
 
-// Convert the head function to a function using Option instad of null
+// Excercise: Convert the head function to a function using Option instad of null
 export const head2 = undefined

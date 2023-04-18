@@ -2,6 +2,8 @@
 We will revisit our process for applying to build something near the sea in Norway.
 As you have seen this is a complex and tedious task, and we will implement more of the rules using functional concepts.
 
+Exercise:
+---------
 We will start simple by just calling an api using the address from ENV, but we will have proper error handling doing it.
 1. Get address from ENV to use with the api
 2. If the address is not present, stop the application and return the error message "Address not found"

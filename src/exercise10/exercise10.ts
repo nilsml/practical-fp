@@ -2,6 +2,8 @@
 In the api file we have defined two interfaces, one representing a Webhook and the otherone representing a Webhook result.
 We want a webhook to be injected into postAnswer api function that should be called after applying for address.
 
+Exercise:
+---------
 This exercise is building upon exercise 9, but for simplicity we are using strings for the errors instead of typed ones.
 The SubmitType is already defined and represent the signature of the function to implement.
 

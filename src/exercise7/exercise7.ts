@@ -17,5 +17,5 @@ export const getMostLovedPlaceForAnyoneElse = () => getMostLovedPlaceInNorway(tr
 type TEReturnType = TE.TaskEither<string, string>
 export const getMostLovedPlaceForSomeoneWhoCaresWithTask: TEReturnType =
 
-// Create a function for the sad part
+// Exercise: Create a function for the sad part
 export const getMostLovedPlaceForAnyoneElseWithTask: TEReturnType =

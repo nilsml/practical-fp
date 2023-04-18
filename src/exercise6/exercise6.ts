@@ -8,5 +8,5 @@ The alternative value could be an error message or a default value to use if no 
 // A good example of something that could fail is getting ENV variables in Node
 export const getAddress = () => process.env.ADDRESS
 
-// Create a safe function for getting address and returning an error message if not
+// Exercise: Create a safe function for getting address and returning an error message if not
 export const getAddressSafely = () => undefined

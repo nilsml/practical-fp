@@ -20,7 +20,9 @@ export const submit = (area: number) => {
   const calc4 = (resultCalc3: number) => resultCalc3 - 10
 
   
-  // TODO: Find a way to use both calc1+cal2 in two other calculations to show the power of composition
+  // Exercise:
+  // ---------  
+  // Find a way to use both calc1+cal2 in two other calculations to show the power of composition
   // 1->2->3 and 1->2->4 and 3->4 perhaps
   // Need to have different input for first function multiple times to show how easy it is with composition
   // compositeFunction(something) + compositeFunction(somcethingElse) + ...
