@@ -7,7 +7,7 @@ As you may have guessed, for widening sum types are perfect.
 This exercise is basically the same as exercise8 with a couple of differences:
 1. The function getting ENV variable will use the EnvErrorType
 2. the function calling the API will use the ApiErrorType
-3. Return type for the function should be SubmitType as defined below
+3. Return type for the function is defined by SubmitType as defined below
 */
 
 export type EnvErrorType = 'EnvNotSet' | 'EnvNotValid'

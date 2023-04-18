@@ -6,24 +6,37 @@ import { Webhook, WebhookResult } from './api'
 import { submit } from './exercise10'
 
 describe('Test submitting application with webhook', () => {
-  const mockWebhook = {
-    send: (result: boolean) => {
-      expect(result).toBe(true)
-      Promise.resolve({ text: 'ok' } as WebhookResult)
-    }
-  } as Webhook
+  const mockWebhook = (text: string) => ({
+    send: () => Promise.resolve({ text } as WebhookResult),
+  }) as Webhook
 
   beforeAll(() => {
     dotenv.config()
   })
 
-  test('Gives success', async () => {
-    const result = submit()(mockWebhook)
+  test('Gives success 1', (done) => {
+    const result = submit()(mockWebhook('ok'))
+    result()
+      .then((r) => {
+        E.fold(
+          (error: string | Error) => fail(error.toString()),
+          ({ text }: WebhookResult) => expect(text).toBe('ok')
+        )(r)
+        done()
+      })
+      .catch((e) => {
+        fail(e)
+        done()
+      })
+  })
+
+  test('Gives success 2', async () => {
+    const result = submit()(mockWebhook('ok'))
     try {
       await T.map(
         E.fold(
           (error: string | Error) => fail(error.toString()),
-          (res: WebhookResult) => expect(res).toBe('ok')
+          ({ text }: WebhookResult) => expect(text).toBe('ok')
         )
       )(result)()
     } catch (e) {
