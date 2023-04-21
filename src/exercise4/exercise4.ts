@@ -33,7 +33,7 @@ export const submit = (area: number) => {
   ages.forEach((age) => {
     const res1 = calc1(numberOfDaysLeftInThisMonth, age)
     const res2 = calc2(daysInYear(today.getFullYear()), res1)
-    const res3 = calc3(area, res2) // TODO: Move const out
+    const res3 = calc3(area, res2)
     const res4 = calc4(res3)
     sum = sum + res4
   })

@@ -6,7 +6,7 @@ We shall export a function that returns true if:
 
 Exercise:
 ---------
-Change the code below to use only prure functions and no mutation
+Change the code below to use only pure functions and no mutation
 
 */
 

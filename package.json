@@ -7,7 +7,6 @@
     "test": "jest",
     "lint": "eslint ./src/ --ext .js,.jsx,.ts,.tsx",
     "build": "npx tsc --outDir out",
-    "dev": "node src/index.ts"
   },
   "repository": {
     "type": "git",
