@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint ./src/ --ext .js,.jsx,.ts,.tsx",
-    "build": "npx tsc --outDir out",
+    "build": "npx tsc --outDir out"
   },
   "repository": {
     "type": "git",
