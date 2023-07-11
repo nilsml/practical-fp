@@ -10,6 +10,16 @@ We will start simple by just calling an api using the address from ENV, but we w
 3. If the address is found, use it to call api
 4. If not, stop the application and return the error message "Application not submitted"
 5. If everything goes well, return "Submission ok!"
+
+Tips to get you started: for each type there are `fromType` helper functions to move from one type to another.
+Using these functions within a pipeline is very useful
+Example:
+
+pipe(
+  E.of(something),
+  TE.fromEither,
+  TE.map((something) => TE.tryCatch(() => ...))
+)
 */
 
 import * as T from 'fp-ts/Task'

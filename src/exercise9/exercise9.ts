@@ -10,6 +10,10 @@ This exercise is basically the same as exercise8 with a couple of differences:
 1. The function getting ENV variable will use the EnvErrorType
 2. the function calling the API will use the ApiErrorType
 3. Return type for the function is defined by SubmitType as defined below
+
+Tips to get you started: For the chain functions there is usueally W variant.
+W means Widen. Functions that end with W are able to aggregate errors into a union (for Either based data types) or environments into an intersection (for Reader based data types).
+Reference: https://gcanti.github.io/fp-ts/guides/code-conventions.html#what-a-w-suffix-means-eg-chainw-or-chaineitherkw
 */
 
 export type EnvErrorType = 'EnvNotSet' | 'EnvNotValid'

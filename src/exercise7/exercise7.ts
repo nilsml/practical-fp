@@ -10,7 +10,7 @@ import { getMostLovedPlaceInNorway } from './api'
 
 // Use provided api to get the best place in Norway for someone who cares
 export const getMostLovedPlaceForSomeoneWhoCares = () => getMostLovedPlaceInNorway(false)
-// Use provided api to get the best place in Norway for someone who cares
+// Use provided api to get the best place in Norway for the ones who don't care
 export const getMostLovedPlaceForAnyoneElse = () => getMostLovedPlaceInNorway(true)
 
 // Create a function that has the following signature, and is doing the same as above

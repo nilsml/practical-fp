@@ -1,5 +1,5 @@
 /* It is time to have a look at the Reader which makes it possible to inject dependencies in a smart way.
-In the api file we have defined two interfaces, one representing a Webhook and the otherone representing a Webhook result.
+In the api file we have defined two interfaces, one representing a Webhook and the other one representing a Webhook result.
 We want a webhook to be injected into postAnswer api function that should be called after applying for address.
 
 Exercise:
@@ -11,6 +11,7 @@ You may want to have a look at the tests. There you'll see two different tests t
 Note how the webhook mock is injected.
 Good luck!
 */
+
 import { IO } from 'fp-ts/IO' // IO is representing a thunk; () =>
 import * as E from 'fp-ts/Either'
 import * as TE from 'fp-ts/TaskEither'

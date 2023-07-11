@@ -6,6 +6,7 @@ This exercise is building upon exercise 9, but for simplicity we are using strin
 The SubmitType is already defined and represent the signature of the function to implement.
 Good luck!
 */
+
 import { IO } from 'fp-ts/IO' // IO is representing a thunk; () =>
 import * as E from 'fp-ts/Either'
 import * as TE from 'fp-ts/TaskEither'
