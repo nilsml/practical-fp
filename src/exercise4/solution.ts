@@ -5,6 +5,7 @@ It is a complex task and involves multiple sub-calculations.
 import { today, numberOfDaysLeftInThisMonth, daysInYear } from './api'
 import { compose } from '../utility-functions'
 
+
   // 1. Multiply number of days left in this month with Pi
   const calc1 = (numberOfDaysLeft: number) => (ageFamilyMember: number) =>
     (ageFamilyMember / 10) * numberOfDaysLeft * Math.PI

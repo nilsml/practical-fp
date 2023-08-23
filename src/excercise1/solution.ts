@@ -18,6 +18,7 @@ export const submit = ((date: Date) => (name: string) => {
   return false
 })(new Date()) // Please note that date will be the same the whole time. Not possible to make pure and change with time.
 
+// A more compact example
 export const submit2 = (
   (date: Date) => (name: string) =>
     !!name?.length && withinWorkingHours(hourOfTheDay(date))
