@@ -49,7 +49,8 @@
 				"editorconfig.editorconfig",
 				"kamikillerto.vscode-colorize",
 				"eg2.vscode-npm-script",
-				"vscode-icons-team.vscode-icons"
+				"vscode-icons-team.vscode-icons",
+				"orta.vscode-jest"
 			]
 		}
 	},
