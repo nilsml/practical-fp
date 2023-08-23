@@ -1,0 +1,58 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
+{
+	"name": "Node.js & TypeScript",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bullseye",
+	"features": {
+		"ghcr.io/meaningful-ooo/devcontainer-features/homebrew:2": {},
+		"ghcr.io/devcontainers-contrib/features/npm-package:1": {
+			"package": "typescript",
+			"version": "latest"
+		},
+		"ghcr.io/devcontainers-contrib/features/zsh-plugins:0": {
+			"plugins": "ssh-agent npm",
+			"omzPlugins": "https://github.com/zsh-users/zsh-autosuggestions",
+			"username": "node"
+		}
+	},
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "npm install",
+	// Configure tool-specific properties.
+	"customizations": {
+		"settings": {
+			"terminal.integrated.defaultProfile.linux": "zsh",
+			"git.rebaseWhenSync": true,
+			"editor.bracketPairColorization.enabled": true,
+			"editor.defaultFormatter": "esbenp.prettier-vscode",
+			"[javascript]": {
+				"editor.formatOnSave": true,
+				"editor.defaultFormatter": "esbenp.prettier-vscode"
+			},
+			"editor.linkedEditing": true,
+			"html.autoClosingTags": true,
+			"javascript.autoClosingTags": true,
+			"typescript.autoClosingTags": true
+		},
+		"vscode": {
+			"extensions": [
+				"dbaeumer.vscode-eslint",
+				"airyshift.spaces-inside-braces",
+				"pflannery.vscode-versionlens",
+				"esbenp.prettier-vscode",
+				"vtrois.gitmoji-vscode",
+				"eamodio.gitlens",
+				"editorconfig.editorconfig",
+				"kamikillerto.vscode-colorize",
+				"eg2.vscode-npm-script",
+				"vscode-icons-team.vscode-icons"
+			]
+		}
+	},
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	 "remoteUser": "node"
+}
