@@ -21,10 +21,8 @@
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": [
-		"npm install -g gitmoji-cli",
-		"npm install"
-	],
+	"onCreateCommand": "npm install -g gitmoji-cli",
+	"postCreateCommand":	"npm install",
 	// Configure tool-specific properties.
 	"customizations": {
 		"settings": {
