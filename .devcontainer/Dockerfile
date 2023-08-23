@@ -13,8 +13,9 @@ ARG USERNAME=automatic
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
-ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
-ENV PATH=$PATH:/home/node/.npm-global/bin
+ENV NPM_CONFIG_PREFIX="/home/node/.npm-global"
+ENV PATH="$PATH:/home/node/.npm-global/bin"
+RUN echo $PATH
 
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
      && apt-get -y install --no-install-recommends curl silversearcher-ag fonts-powerline fonts-firacode
