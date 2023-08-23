@@ -13,11 +13,11 @@ ARG USERNAME=automatic
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
-#ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
-#ENV PATH=$PATH:/home/node/.npm-global/bin
-
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
      && apt-get -y install --no-install-recommends curl silversearcher-ag fonts-powerline fonts-firacode
+
+RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+RUN git clone https://github.com/zsh-users/zsh-completions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-completions
 
 VOLUME [ "/var/lib/docker" ]
 
