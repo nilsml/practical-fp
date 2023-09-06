@@ -11,8 +11,8 @@ The test must be green when you are finished
 
 export type Context<T> = { foo: T }
 
-type Of = <T>(a: T) => Context<T>
-const of: Of = 
+export type Of = <T>(a: T) => Context<T>
+export const of: Of = 
 
 export const wrappedValue = <T>(value: T) => of(value)
 

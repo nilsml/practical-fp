@@ -1,4 +1,4 @@
-import { Context, wrappedValue } from './exercise5'
+import { Context, wrappedValue } from './exercise'
 
 describe("Test 'of' function", () => {
   describe('Expect wrapped value to be the same as the parameter', () => {
