@@ -1,28 +1,28 @@
-/* In the next exercise we will take error handling one step further.
-Until now we have used strings for representing errors. However sometimes it is better to use proper types.
-And for different functions, different types may be used.
-fp-ts ts has a way of dealing with different error types, and it is referred to as widening a type.
-As you may have guessed, for widening sum types are perfect.
+/* It is time to put things we have learned this far together and make some proper use of it.
+We will revisit our process for applying to build something near the sea in Norway.
+As you have seen this is a complex and tedious task, and we will implement more of the rules using functional concepts.
 
 Exercise:
 ---------
-This exercise is basically the same as exercise8 with a couple of differences:
-1. The function getting ENV variable will use the EnvErrorType
-2. the function calling the API will use the ApiErrorType
-3. Return type for the function is defined by SubmitType as defined below
+We will start simple by just calling an api using the address from ENV, but we will have proper error handling doing it.
+1. Get address from ENV to use with the api
+2. If the address is not present, stop the application and return the error message "Address not found"
+3. If the address is found, use it to call api
+4. If not, stop the application and return the error message "Application not submitted"
+5. If everything goes well, return "Submission ok!"
 
-Tips to get you started: For the chain functions there is usueally W variant.
-W means Widen. Functions that end with W are able to aggregate errors into a union (for Either based data types) or environments into an intersection (for Reader based data types).
-Reference: https://gcanti.github.io/fp-ts/guides/code-conventions.html#what-a-w-suffix-means-eg-chainw-or-chaineitherkw
+Tips to get you started: for each type there are `fromType` helper functions to move from one type to another.
+Using these functions within a pipeline is very useful
+Example:
+
+pipe(
+  E.of(something),
+  TE.fromEither,
+  TE.map((something) => TE.tryCatch(() => ...))
+)
 */
 
-export type EnvErrorType = 'EnvNotSet' | 'EnvNotValid'
-export type HttpError = 401 | 404
-export type ApiErrorType = 'MissingUrl' | HttpError
-
-import { IO } from 'fp-ts/IO' // IO is representing a thunk; () =>
-import * as TE from 'fp-ts/TaskEither'
+import * as T from 'fp-ts/Task'
 import { applyForAddress } from './api'
 
-type SubmitType = IO<TE.TaskEither<EnvErrorType | ApiErrorType, boolean>>
-export const submit: SubmitType = 
+export const submit: () => T.Task<string> = () => 

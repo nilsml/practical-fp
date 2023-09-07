@@ -1,11 +1,16 @@
-/* Our first meeting with fp-ts
-In this exercise we will have a look at how we can use Option instead of handling nulls in our code.
-We will start off nice and gently to get you familiar with the fp-ts way of doing things.
-Reference: https://gcanti.github.io/fp-ts/modules/Option.ts.html
-*/ 
+/*
+The last basic function that we need to implement is fold.
+We are using fold to execute functions on the data that is in the Context, and return something.
+In our contrieved example this is straight forward as we only have to deal with one value.
 
-// A function that gives first element in string array if not empty
-export const head = (strArray: Array<string>): string | null => strArray.length > 0 ? strArray[0] : null
 
-// Excercise: Convert the head function to a function using Option instad of null
-export const head2 = undefined
+Exercise:
+---------
+
+Given the type Context and the implemented 'of' function, implement a fold function that fullfills the requirements as defined by the type Fold
+The test must be green when you are finished
+*/
+import { Context } from '../exercise5/solution'
+
+type Fold = <A, B>(f: (a: A) => B) => (wrappedValue: Context<A>) => B 
+export const fold: Fold = 

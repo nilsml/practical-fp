@@ -1,28 +1,24 @@
-/* Our first meeting with fp-ts
-In this exercise we will have a look at how we can use Option instead of handling nulls in our code.
-We will start off nice and gently to get you familiar with the fp-ts way of doing things.
-Reference: https://grossbart.github.io/fp-ts/modules/Option.ts.html
-*/ 
+/*
+The last basic function that we need to implement is fold.
+We are using fold to execute functions on the data that is in the Context, and return something.
+In our contrieved example this is straight forward as we only have to deal with one value.
 
-import { Option, some, none, fromNullable, map, chain } from 'fp-ts/Option'
-import { pipe } from 'fp-ts/function'
 
-// Original
-export const head = (strArray: Array<string>): string | null => strArray.length > 0 ? strArray[0] : null
+Exercise:
+---------
 
-// Example 1
-export const head2 = (strArray: Array<string>): Option<string> => strArray.length > 0 ? some(strArray[0]) : none
+Given the type Context and the implemented 'of' function, implement a fold function that fullfills the requirements as defined by the type Fold
+The test must be green when you are finished
+*/
+import { Context } from '../exercise5/solution'
 
-// Example 2
-export const head3 = (strArray?: Array<string>): Option<string> =>
-  pipe(
-    fromNullable(strArray),
-    map(s => s.length > 0 ? s[0] : '')
-  )
+type Fold = <A, B>(f: (a: A) => B) => (wrappedValue: Context<A>) => B 
+export const fold: Fold = (f) => ({ foo }) => f(foo)
 
-// Example 3
-export const head4 = (strArray?: Array<string>): Option<string> =>
-  pipe(
-    fromNullable(strArray),
-    chain(s => s.length > 0 ? some(s[0]) : none)
-  )
+// Example of a more complex context
+type ComplexContext<A, B> = { foo: A, bar: B }
+export type Of = <A, B>(a: A, b: B) => ComplexContext<A, B>
+export const of: Of = (a, b) => ({ foo: a, bar: b })
+
+type Fold2 = <A, B, C>(f1: (a: A) => C, f2: (b: B) => C) => (wrappedValue: ComplexContext<A, B>) => C 
+export const fold2: Fold2 = (f1, f2) => ({ foo, bar }) => f1(foo) || f2(bar)

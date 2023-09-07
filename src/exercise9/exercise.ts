@@ -1,13 +1,11 @@
-/* Taking fp-ts to the next level, introducing Either<E, T>
-Either can be very usefull when dealing with functions that can fail.
-It could be an api or just a function that is unpredictable.
-In addition to Option that gives us the value or none, Either will give us the value OR an alternative value.
-The alternative value could be an error message or a default value to use if no other value is presented.
-Reference: https://gcanti.github.io/fp-ts/modules/Either.ts.html
-*/
+/* Our first meeting with fp-ts
+In this exercise we will have a look at how we can use Option instead of handling nulls in our code.
+We will start off nice and gently to get you familiar with the fp-ts way of doing things.
+Reference: https://gcanti.github.io/fp-ts/modules/Option.ts.html
+*/ 
 
-// A good example of something that could fail is getting ENV variables in Node
-export const getAddress = () => process.env.ADDRESS
+// A function that gives first element in string array if not empty
+export const head = (strArray: Array<string>): string | null => strArray.length > 0 ? strArray[0] : null
 
-// Exercise: Create a safe function for getting address and returning an error message if not
-export const getAddressSafely = () => undefined
+// Excercise: Convert the head function to a function using Option instad of null
+export const head2 = undefined

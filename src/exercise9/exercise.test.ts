@@ -1,46 +1,24 @@
-import { fold } from 'fp-ts/Either'
-import { getAddress, getAddressSafely } from './exercise'
-import dotenv from 'dotenv'
-import { fail } from '../common/jest-utils'
+import { some, none } from 'fp-ts/Option'
+import { head, head2 } from './exercise'
 
-describe('Getting address from ENV', () => {
-  describe('Without running DotEnv', () => {
-    test('Without running DotEnv, the address is undefined', () => {
-      expect(getAddress()).toBe(undefined)
-    })
-
-    test('Without running DotEnv, our safe function gives an error message', () => {
-      fold(
-        (error: string) => {
-          expect(error).toBeDefined()
-        },
-        () => {
-          // Failing the test
-          fail('This should not happen')
-        }
-      )(getAddressSafely())
-    })
+describe('Test head function', () => {
+  test('Expect vanilla case to work', () => {
+    expect(head(['a', 'b'])).toBe('a')
   })
 
-  describe('After running DotEnv', () => {
-    beforeAll(() => {
-      dotenv.config()
-    })
+  test('What if we use an empty array?', () => {
+    const a: Array<string> = []
+    const first = head(a)
+    expect(first?.charAt(0)).toBe(undefined)
+  })
+})
 
-    test('When DotEnv has been run, the address is something', () => {
-      expect(getAddress()).toBeDefined()
-    })
+describe('Test head2 function', () => {
+  test('Expect some(result) if string array contains something', () => {
+    expect(head2(['a', 'b'])).toStrictEqual(some('a'))
+  })
 
-    test('Our safe function is giving a wrapped value', () => {
-      fold(
-        () => {
-          // Failing the test
-          fail('This should not happen')
-        },
-        (value) => {
-          expect(value).toBeDefined()
-        }
-      )(getAddressSafely())
-    })
+  test('Expect empty array to give none result', () => {
+    expect(head2([])).toStrictEqual(none)
   })
 })

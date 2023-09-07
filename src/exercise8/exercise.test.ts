@@ -1,24 +1,18 @@
-import { some, none } from 'fp-ts/Option'
-import { head, head2 } from './exercise'
 
-describe('Test head function', () => {
-  test('Expect vanilla case to work', () => {
-    expect(head(['a', 'b'])).toBe('a')
-  })
+import { of } from '../exercise5/solution'
+import { fold } from './exercise'
 
-  test('What if we use an empty array?', () => {
-    const a: Array<string> = []
-    const first = head(a)
-    expect(first?.charAt(0)).toBe(undefined)
-  })
-})
+describe("Test 'fold' function", () => {
+  describe('Expect fold to make changes to wrapped value and return result', () => {
+    test('Expect altered text to be output', () => {
+      const input = of('text')
+      const output = fold((t: string) => t + '_altered')(input)
+      expect(output).toBe(`${input.foo}_altered`)
+    })
 
-describe('Test head2 function', () => {
-  test('Expect some(result) if string array contains something', () => {
-    expect(head2(['a', 'b'])).toStrictEqual(some('a'))
-  })
-
-  test('Expect empty array to give none result', () => {
-    expect(head2([])).toStrictEqual(none)
+    test('Expect change of type to work', () => {
+      const input = of(10)
+      expect(fold((n: number) => n.toString())(input)).toBe('10')
+    })
   })
 })

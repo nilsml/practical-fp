@@ -1,56 +1,46 @@
-import { right, left } from 'fp-ts/Either'
+import { fold } from 'fp-ts/Either'
+import { getAddress, getAddressSafely } from './exercise'
+import dotenv from 'dotenv'
 import { fail } from '../common/jest-utils'
-import {
-  getMostLovedPlaceForSomeoneWhoCares,
-  getMostLovedPlaceForAnyoneElse,
-  getMostLovedPlaceForSomeoneWhoCaresWithTask,
-  getMostLovedPlaceForAnyoneElseWithTask
-} from './solution'
 
-describe('Testing with promises', () => {
-  test('Happy path resolves and gives the right result', (done) => {
-    getMostLovedPlaceForSomeoneWhoCares()
-      .then((place) => {
-        expect(place).toBe('Askøy')
-        done()
-      })
-      .catch(() => {
-        fail('Not supposed to happen')
-        done()
-      })
-  })
-  test('Sad part gives an error', (done) => {
-    getMostLovedPlaceForAnyoneElse()
-      .then(() => {
-        fail('Not supposed to happen')
-        done()
-      })
-      .catch((error) => {
-        expect(error).toBe('Then sodd off!')
-        done()
-      })
-  })
-})
+describe('Getting address from ENV', () => {
+  describe('Without running DotEnv', () => {
+    test('Without running DotEnv, the address is undefined', () => {
+      expect(getAddress()).toBe(undefined)
+    })
 
-describe('Testing with TaskEither', () => {
-  test('Happy path resolves and gives the right result', (done) => {
-    getMostLovedPlaceForSomeoneWhoCaresWithTask().then((place) => {
-      expect(place).toStrictEqual(right('Askøy'))
-      done()
-    })
-    .catch(() => {
-      fail('Not supposed to happen')
-      done()
+    test('Without running DotEnv, our safe function gives an error message', () => {
+      fold(
+        (error: string) => {
+          expect(error).toBeDefined()
+        },
+        () => {
+          // Failing the test
+          fail('This should not happen')
+        }
+      )(getAddressSafely())
     })
   })
-  test('Sad part gives error', (done) => {
-    getMostLovedPlaceForAnyoneElseWithTask().then((place) => {
-      expect(place).toStrictEqual(left('Then sodd off!'))
-      done()
+
+  describe('After running DotEnv', () => {
+    beforeAll(() => {
+      dotenv.config()
     })
-    .catch(() => {
-      fail('Not supposed to happen')
-      done()
+
+    test('When DotEnv has been run, the address is something', () => {
+      expect(getAddress()).toBeDefined()
+    })
+
+    test('Our safe function is giving a wrapped value', () => {
+      fold(
+        () => {
+          // Failing the test
+          fail('This should not happen')
+        },
+        (value) => {
+          expect(value).toBeDefined()
+        }
+      )(getAddressSafely())
     })
   })
 })

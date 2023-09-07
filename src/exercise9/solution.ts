@@ -1,17 +1,28 @@
+/* Our first meeting with fp-ts
+In this exercise we will have a look at how we can use Option instead of handling nulls in our code.
+We will start off nice and gently to get you familiar with the fp-ts way of doing things.
+Reference: https://grossbart.github.io/fp-ts/modules/Option.ts.html
+*/ 
 
-/* Taking fp-ts to the next level, introducing Either<E, T>
-Either can be very usefull when dealing with functions that can fail.
-It could be an api or just a function that is unpredictable.
-In addition to Option that gives us the value or none, Either will give us the value OR an alternative value.
-The alternative value could be an error message or a default value to use if no other value is presented.
-Reference: https://grossbart.github.io/fp-ts/modules/Either.ts.html
-*/
-import { Either, fromNullable } from 'fp-ts/Either'
+import { Option, some, none, fromNullable, map, chain } from 'fp-ts/Option'
+import { pipe } from 'fp-ts/function'
 
+// Original
+export const head = (strArray: Array<string>): string | null => strArray.length > 0 ? strArray[0] : null
 
-// A good example of something that could fail is getting ENV variables in Node
-export const getAddress = () => process.env.ADDRESS
+// Example 1
+export const head2 = (strArray: Array<string>): Option<string> => strArray.length > 0 ? some(strArray[0]) : none
 
-// Exercise: Create a safe function for getting address and returning an error message if not
-type GetAddressSafelyType = () => Either<string, string>
-export const getAddressSafely: GetAddressSafelyType = () => fromNullable('Address not found')(process.env.ADDRESS)
+// Example 2
+export const head3 = (strArray?: Array<string>): Option<string> =>
+  pipe(
+    fromNullable(strArray),
+    map(s => s.length > 0 ? s[0] : '')
+  )
+
+// Example 3
+export const head4 = (strArray?: Array<string>): Option<string> =>
+  pipe(
+    fromNullable(strArray),
+    chain(s => s.length > 0 ? some(s[0]) : none)
+  )

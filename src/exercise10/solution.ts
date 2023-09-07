@@ -1,24 +1,17 @@
-/* Another thing that is common for a developer these days are asynchronous functions.
-Functions that may possibly return something to us in the future.
-In Typescript these are typically represented as promises.
-One functional way of working with promises would be to just use then directly, like we did in the old days.
-In fp-ts we have Tasks to make it more pleasant. It also allows us to combine it with other fp-ts types like Eithers.
-Reference: https://grossbart.github.io/fp-ts/modules/TaskEither.ts.html
-Hint: tryCatch()
+
+/* Taking fp-ts to the next level, introducing Either<E, T>
+Either can be very usefull when dealing with functions that can fail.
+It could be an api or just a function that is unpredictable.
+In addition to Option that gives us the value or none, Either will give us the value OR an alternative value.
+The alternative value could be an error message or a default value to use if no other value is presented.
+Reference: https://grossbart.github.io/fp-ts/modules/Either.ts.html
 */
-import * as TE from 'fp-ts/TaskEither'
-import { getMostLovedPlaceInNorway } from './api'
+import { Either, fromNullable } from 'fp-ts/Either'
 
-// Use provided api to get the best place in Norway for someone who cares
-export const getMostLovedPlaceForSomeoneWhoCares = () => getMostLovedPlaceInNorway(false)
-// Use provided api to get the best place in Norway for the ones who don't
-export const getMostLovedPlaceForAnyoneElse = () => getMostLovedPlaceInNorway(true)
 
-// Create a function that has the following signature, and is doing the same as above
-type TEReturnType = TE.TaskEither<string, string>
-export const getMostLovedPlaceForSomeoneWhoCaresWithTask: TEReturnType =
-  TE.tryCatch(() => getMostLovedPlaceInNorway(false), (e: unknown) => e as string)
+// A good example of something that could fail is getting ENV variables in Node
+export const getAddress = () => process.env.ADDRESS
 
-// Create a function for the sad part
-export const getMostLovedPlaceForAnyoneElseWithTask: TEReturnType =
-  TE.tryCatch(() => getMostLovedPlaceInNorway(true), (e: unknown) => e as string)
+// Exercise: Create a safe function for getting address and returning an error message if not
+type GetAddressSafelyType = () => Either<string, string>
+export const getAddressSafely: GetAddressSafelyType = () => fromNullable('Address not found')(process.env.ADDRESS)

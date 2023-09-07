@@ -1,30 +1,34 @@
-/* It is time to have a look at the Reader which makes it possible to inject dependencies in a smart way.
-In the api file we have defined two interfaces, one representing a Webhook and the otherone representing a Webhook result.
-We want a webhook to be injected into postAnswer api function that should be called after applying for address.
+/* In the next exercise we will take error handling one step further.
+Until now we have used strings for representing errors. However sometimes it is better to use proper types.
+And for different functions, different types may be used.
+fp-ts ts has a way of dealing with different error types, and it is referred to as widening a type.
+As you may have guessed, for widening sum types are perfect.
 
 Exercise:
 ---------
-This exercise is building upon exercise 9, but for simplicity we are using strings for the errors instead of typed ones.
-The SubmitType is already defined and represent the signature of the function to implement.
+This exercise is basically the same as exercise8 with a couple of differences:
+1. The function getting ENV variable will use the EnvErrorType
+2. the function calling the API will use the ApiErrorType
+3. Return type for the function is defined by SubmitType as defined below
 
-You may want to have a look at the tests. There you'll see two different tests testing the same thing in two ways.
-Note how the webhook mock is injected.
-Good luck!
+Tips to get you started: For the chain functions there is usueally W variant.
+W means Widen. Functions that end with W are able to aggregate errors into a union (for Either based data types) or environments into an intersection (for Reader based data types).
+Reference: https://gcanti.github.io/fp-ts/guides/code-conventions.html#what-a-w-suffix-means-eg-chainw-or-chaineitherkw
 */
+
+export type EnvErrorType = 'EnvNotSet' | 'EnvNotValid'
+export type HttpError = 401 | 404
+export type ApiErrorType = 'MissingUrl' | HttpError
 
 import { IO } from 'fp-ts/IO' // IO is representing a thunk; () =>
 import * as E from 'fp-ts/Either'
 import * as TE from 'fp-ts/TaskEither'
-import * as RTE from 'fp-ts/ReaderTaskEither'
 import { pipe } from 'fp-ts/function'
+import { applyForAddress } from './api'
 
-import { applyForAddress, postAnswer, Webhook, WebhookResult } from './api'
-
-type SubmitType = IO<RTE.ReaderTaskEither<Webhook, string | Error, WebhookResult>>
+type SubmitType = IO<TE.TaskEither<EnvErrorType | ApiErrorType, boolean>>
 export const submit: SubmitType = () => pipe(
-  E.fromNullable('EnvNotSet')(process.env.ADDRESS),
+  E.fromNullable('EnvNotSet' as EnvErrorType)(process.env.ADDRESS),
   TE.fromEither,
-  TE.chainW((address) => TE.tryCatch(() => applyForAddress(address), () => 'MissingUrl')),
-  RTE.fromTaskEither,
-  RTE.chainW(postAnswer)
+  TE.chainW((address) => TE.tryCatch(() => applyForAddress(address), () => 'MissingUrl' as ApiErrorType))
 )
