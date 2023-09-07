@@ -1,4 +1,4 @@
-import { submit } from './exercise4'
+import { submit } from './exercise'
 
 test('Works', () => {
   expect(submit(40000)).toBe(30)

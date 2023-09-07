@@ -1,5 +1,5 @@
 import { some, none } from 'fp-ts/Option'
-import { head, head2 } from './exercise5'
+import { head, head2 } from './exercise'
 
 describe('Test head function', () => {
   test('Expect vanilla case to work', () => {

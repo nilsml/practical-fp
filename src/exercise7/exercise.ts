@@ -8,7 +8,7 @@ Exercise:
 Given the type Context and the implemented 'of' function, implement a chain function that fullfills the requirements as defined by the type Chain
 The test must be green when you are finished
 */
-import { Context } from '../exercise5-a/solution'
+import { Context } from '../exercise5/solution'
 
 type Chain = <A, B>(f: (a: A) => Context<B>) => (wrappedValue: Context<A>) => Context<B> 
 export const chain: Chain = 

@@ -1,5 +1,5 @@
 import dotenv from 'dotenv'
-import { submit } from './exercise8'
+import { submit } from './exercise'
 
 describe('Test submitting application without address', () => {
   test('Gives an error message back when address is not found', async () => {

@@ -1,28 +1,18 @@
-/* Our first meeting with fp-ts
-In this exercise we will have a look at how we can use Option instead of handling nulls in our code.
-We will start off nice and gently to get you familiar with the fp-ts way of doing things.
-Reference: https://grossbart.github.io/fp-ts/modules/Option.ts.html
+/*
+In this exercise we shall have a look at 'of'. 'of' lifts something into a context so that we can do other operations on it (like map and chain)
+To make sure you understand how 'of' works, you'll get to implement a version of it.
+
+Exercise:
+---------
+
+Given the type Context, implement a 'of' function that lifts a value of type T into this context.
+The test must be green when you are finished
 */ 
 
-import { Option, some, none, fromNullable, map, chain } from 'fp-ts/Option'
-import { pipe } from 'fp-ts/function'
+export type Context<T> = { foo: T }
 
-// Original
-export const head = (strArray: Array<string>): string | null => strArray.length > 0 ? strArray[0] : null
+export type Of = <T>(a: T) => Context<T>
+export const of: Of = (a) => ({ foo: a })
 
-// Example 1
-export const head2 = (strArray: Array<string>): Option<string> => strArray.length > 0 ? some(strArray[0]) : none
+export const wrappedValue = <T>(value: T) => of(value)
 
-// Example 2
-export const head3 = (strArray?: Array<string>): Option<string> =>
-  pipe(
-    fromNullable(strArray),
-    map(s => s.length > 0 ? s[0] : '')
-  )
-
-// Example 3
-export const head4 = (strArray?: Array<string>): Option<string> =>
-  pipe(
-    fromNullable(strArray),
-    chain(s => s.length > 0 ? some(s[0]) : none)
-  )

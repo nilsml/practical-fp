@@ -1,7 +1,7 @@
 import { fold } from 'fp-ts/Either'
 import dotenv from 'dotenv'
 import { fail } from '../common/jest-utils'
-import { submit, EnvErrorType, ApiErrorType } from './exercise9'
+import { submit, EnvErrorType, ApiErrorType } from './exercise'
 
 describe('Test submitting application without address', () => {
   test('Gives an EnvNotSet', async () => {

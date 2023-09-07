@@ -1,30 +1,37 @@
-/* It is time to have a look at the Reader which makes it possible to inject dependencies in a smart way.
-In the api file we have defined two interfaces, one representing a Webhook and the otherone representing a Webhook result.
-We want a webhook to be injected into postAnswer api function that should be called after applying for address.
+/* It is time to put things we have learned this far together and make some proper use of it.
+We will revisit our process for applying to build something near the sea in Norway.
+As you have seen this is a complex and tedious task, and we will implement more of the rules using functional concepts.
 
 Exercise:
 ---------
-This exercise is building upon exercise 9, but for simplicity we are using strings for the errors instead of typed ones.
-The SubmitType is already defined and represent the signature of the function to implement.
+We will start simple by just calling an api using the address from ENV, but we will have proper error handling doing it.
+1. Get address from ENV to use with the api
+2. If the address is not present, stop the application and return the error message "Address not found"
+3. If the address is found, use it to call api
+4. If not, stop the application and return the error message "Application not submitted"
+5. If everything goes well, return "Submission ok!"
 
-You may want to have a look at the tests. There you'll see two different tests testing the same thing in two ways.
-Note how the webhook mock is injected.
-Good luck!
+Tips to get you started: for each type there are `fromType` helper functions to move from one type to another.
+Using these functions within a pipeline is very useful
+Example:
+
+pipe(
+  E.of(something),
+  TE.fromEither,
+  TE.map((something) => TE.tryCatch(() => ...))
+)
 */
 
 import { IO } from 'fp-ts/IO' // IO is representing a thunk; () =>
 import * as E from 'fp-ts/Either'
+import * as T from 'fp-ts/Task'
 import * as TE from 'fp-ts/TaskEither'
-import * as RTE from 'fp-ts/ReaderTaskEither'
-import { flow } from 'fp-ts/function'
+import { pipe } from 'fp-ts/function'
+import { applyForAddress } from './api'
 
-import { applyForAddress, postAnswer, Webhook, WebhookResult } from '../exercise10/api'
-
-type SubmitType = IO<RTE.ReaderTaskEither<Webhook, string | Error, WebhookResult>>
-export const submit: SubmitType = () => flow(
+export const submit: IO<T.Task<string>> = () => pipe(
+  E.fromNullable('Address not found')(process.env.ADDRESS),
   TE.fromEither,
-  TE.map(a => a as string),
-  TE.chainW((address) => TE.tryCatch(() => applyForAddress(address), () => 'MissingUrl')),
-  RTE.fromTaskEither,
-  RTE.chainW(postAnswer)
-)(E.fromNullable('EnvNotSet')(process.env.ADDRESS))
+  TE.chain((address) => TE.tryCatch(() => applyForAddress(address), (error: unknown) => error as string)),
+  T.map(E.fold((error) => error, (value) => value ? 'Submission ok!' : 'Application not submitted'))
+)

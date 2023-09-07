@@ -1,30 +1,24 @@
-/* It is time to have a look at the Reader which makes it possible to inject dependencies in a smart way.
-In the api file we have defined two interfaces, one representing a Webhook and the otherone representing a Webhook result.
-We want a webhook to be injected into postAnswer api function that should be called after applying for address.
-
-Exercise:
----------
-This exercise is building upon exercise 9, but for simplicity we are using strings for the errors instead of typed ones.
-The SubmitType is already defined and represent the signature of the function to implement.
-
-You may want to have a look at the tests. There you'll see two different tests testing the same thing in two ways.
-Note how the webhook mock is injected.
-Good luck!
+/* Another thing that is common for a developer these days are asynchronous functions.
+Functions that may possibly return something to us in the future.
+In Typescript these are typically represented as promises.
+One functional way of working with promises would be to just use then directly, like we did in the old days.
+In fp-ts we have Tasks to make it more pleasant. It also allows us to combine it with other fp-ts types like Eithers.
+Reference: https://grossbart.github.io/fp-ts/modules/TaskEither.ts.html
+Hint: tryCatch()
 */
-
-import { IO } from 'fp-ts/IO' // IO is representing a thunk; () =>
-import * as E from 'fp-ts/Either'
 import * as TE from 'fp-ts/TaskEither'
-import * as RTE from 'fp-ts/ReaderTaskEither'
-import { pipe } from 'fp-ts/function'
+import { getMostLovedPlaceInNorway } from './api'
 
-import { applyForAddress, postAnswer, Webhook, WebhookResult } from './api'
+// Use provided api to get the best place in Norway for someone who cares
+export const getMostLovedPlaceForSomeoneWhoCares = () => getMostLovedPlaceInNorway(false)
+// Use provided api to get the best place in Norway for the ones who don't
+export const getMostLovedPlaceForAnyoneElse = () => getMostLovedPlaceInNorway(true)
 
-type SubmitType = IO<RTE.ReaderTaskEither<Webhook, string | Error, WebhookResult>>
-export const submit: SubmitType = () => pipe(
-  E.fromNullable('EnvNotSet')(process.env.ADDRESS),
-  TE.fromEither,
-  TE.chainW((address) => TE.tryCatch(() => applyForAddress(address), () => 'MissingUrl')),
-  RTE.fromTaskEither,
-  RTE.chainW(postAnswer)
-)
+// Create a function that has the following signature, and is doing the same as above
+type TEReturnType = TE.TaskEither<string, string>
+export const getMostLovedPlaceForSomeoneWhoCaresWithTask: TEReturnType =
+  TE.tryCatch(() => getMostLovedPlaceInNorway(false), (e: unknown) => e as string)
+
+// Create a function for the sad part
+export const getMostLovedPlaceForAnyoneElseWithTask: TEReturnType =
+  TE.tryCatch(() => getMostLovedPlaceInNorway(true), (e: unknown) => e as string)

@@ -1,5 +1,5 @@
 import { fold } from 'fp-ts/Either'
-import { getAddress, getAddressSafely } from './exercise6'
+import { getAddress, getAddressSafely } from './exercise'
 import dotenv from 'dotenv'
 import { fail } from '../common/jest-utils'
 

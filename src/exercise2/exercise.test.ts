@@ -1,4 +1,4 @@
-import { submit } from './exercise2'
+import { submit } from './exercise'
 
 test('Empty name is failing', () => {
   expect(submit('', new Date(1976, 1, 1))).toBe(false)

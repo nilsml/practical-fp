@@ -8,7 +8,7 @@ Exercise:
 Given the type Context and the implemented 'of' function, implement a map function that fullfills the requirements as defined by the type Map
 The test must be green when you are finished
 */
-import { Context } from '../exercise5-a/solution'
+import { Context } from '../exercise5/solution'
 
 type Map = <A, B>(f: (a: A) => B) => (wrappedValue: Context<A>) => Context<B> 
 export const map: Map = 

@@ -1,4 +1,4 @@
-import { submit } from './exercise1'
+import { submit } from './exercise'
 
 test('Invalid name fails', () => {
   expect(submit('')).toBe(false)

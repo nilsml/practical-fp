@@ -2,8 +2,8 @@ import dotenv from 'dotenv'
 import * as E from 'fp-ts/Either'
 import * as T from 'fp-ts/Task'
 import { fail } from '../common/jest-utils'
-import { Webhook, WebhookResult } from './api'
-import { submit } from './exercise10'
+import { Webhook, WebhookResult } from '../exercise13/api'
+import { submit } from './exercise'
 
 describe('Test submitting application with webhook', () => {
   const mockWebhook = (text: string) => ({
