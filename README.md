@@ -8,7 +8,7 @@ Each exercise corresponds to a topic in the workshop, and ranges from immutabili
 Every exercise has at least three files:
 |File name|Description|
 |---------|-----------|
-|exeercise.ts|The actual exercise to solve|
+|exercise.ts|The actual exercise to solve|
 |exercise.test.ts|Unit tests for this particular exercise|
 |solution.ts|A possible solution (and sometimes additional solutions)|
 
