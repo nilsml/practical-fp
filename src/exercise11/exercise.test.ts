@@ -5,7 +5,7 @@ import {
   getMostLovedPlaceForAnyoneElse,
   getMostLovedPlaceForSomeoneWhoCaresWithTask,
   getMostLovedPlaceForAnyoneElseWithTask
-} from './solution'
+} from './exercise'
 
 describe('Testing with promises', () => {
   test('Happy path resolves and gives the right result', (done) => {

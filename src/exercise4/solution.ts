@@ -4,6 +4,7 @@ It is a complex task and involves multiple sub-calculations.
 */
 import { today, numberOfDaysLeftInThisMonth, daysInYear } from './api'
 import { compose } from '../utility-functions'
+import { number } from 'fp-ts'
 
 
   // 1. Multiply number of days left in this month with Pi
@@ -30,6 +31,7 @@ import { compose } from '../utility-functions'
 
   export const submit = (area: number) => {
     const calculate = compose(calc4, calc3(area), calc2(daysInYear(today.getFullYear())), calc1(numberOfDaysLeftInThisMonth))
+    calc1(numberOfDaysLeftInThisMonth) >> calc2()
     // With pipe
     //const calculate = pipe(calc1(numberOfDaysLeftInThisMonth), calc2(daysInYear(today.getUTCFullYear())), calc3(area), calc4)
     const sum = ages.reduce((acc, age) => acc + calculate(age))

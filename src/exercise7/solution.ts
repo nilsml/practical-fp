@@ -11,4 +11,4 @@ The test must be green when you are finished
 import { Context } from '../exercise5/solution'
 
 type Chain = <A, B>(f: (a: A) => Context<B>) => (wrappedValue: Context<A>) => Context<B> 
-export const map: Chain = (f) => ({ foo }) => f(foo)
+export const chain: Chain = (f) => ({ foo }) => f(foo)
