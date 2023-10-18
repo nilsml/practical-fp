@@ -1,6 +1,11 @@
 /* Composition
-In this excercise we shall calculate the time it should take to process the application.
-It is a complex task and involves multiple sub-calculations.
+In this excercise we shall practice what we have learned about composition.
+Two functions exist already. One is removing the first string in a string array, and returns the rest.
+The other one removes the last word, and retunrns the rest.
+
+Excercise:
+----------
+Implement the two functions 'removeFirstTwoWords' and 'removeLastWord' by the use of composition and make the tests go green
 */
 
 import { compose } from '../utility-functions'

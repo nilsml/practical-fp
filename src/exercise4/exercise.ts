@@ -5,8 +5,9 @@ The other one removes the last word, and retunrns the rest.
 
 Excercise:
 ----------
-Iimplement the two functions 'removeFirstTwoWords' and 'removeLastWord' by the use of composition and make the tests go green
+Implement the two functions 'removeFirstTwoWords' and 'removeLastWord' by the use of composition and make the tests go green
 */
+
 import { compose } from '../utility-functions'
 
 const removeFirstWord = (stringArray: string[]) => stringArray.length > 0 ? [...stringArray].slice(1) : stringArray
