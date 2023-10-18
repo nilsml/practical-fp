@@ -1,9 +1,9 @@
-import { submit } from './exercise'
+import { removeFirstTwoWords, removeFirstAndLastWord } from './exercise'
 
-test('Works', () => {
-  expect(submit(40000)).toBe(30)
+test('First two words are removed from array', () => {
+  expect(removeFirstTwoWords(['First', 'Second', 'Third', 'Last'])).toEqual(['Third', 'Last'])
 })
 
-test('Works 2', () => {
-  expect(submit(10)).toBe(60)
+test('First two words are removed from array', () => {
+  expect(removeFirstAndLastWord(['First', 'Second', 'Third', 'Last'])).toEqual(['Second', 'Third'])
 })
